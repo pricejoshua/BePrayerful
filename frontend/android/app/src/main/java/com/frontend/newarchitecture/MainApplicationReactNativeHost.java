@@ -1,4 +1,4 @@
-package com.frontend.newarchitecture;
+package com.beprayerful.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.frontend.BuildConfig;
-import com.frontend.newarchitecture.components.MainComponentsRegistry;
-import com.frontend.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.beprayerful.BuildConfig;
+import com.beprayerful.newarchitecture.components.MainComponentsRegistry;
+import com.beprayerful.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "beprayerful",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.1",
     "expo": "~47.0.12",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",

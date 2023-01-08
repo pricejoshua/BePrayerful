@@ -1,4 +1,4 @@
-package com.frontend.newarchitecture.modules;
+package com.beprayerful.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

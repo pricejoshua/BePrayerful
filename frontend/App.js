@@ -6,16 +6,20 @@ export default function App() {
   fetch('http://api.joshuaproject.com/v1/people_groups/daily_unreached.json?api_key=b07deb2be7d9')
   .then((res) => res.json())
   .then((json) => {
-      this.setState({
-          people: json,
-          DataisLoaded: true
-      });
+      // this.setState({
+      //     people: json,
+      //     DataisLoaded: true
+      // });
+      const str = JSON.stringify(json);
+      console.log(json);
+      // const str = JSON.stringify(this.people);
   })
   return (
     <View style={styles.container}>
       <Text style={styles.title}>BePrayerful</Text>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text>this.people</Text>
+      <Text>{str}</Text>
+      {/* <Text>{this.json}</Text> */}
       <StatusBar style="auto" />
     </View>
   );
