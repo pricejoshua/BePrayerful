@@ -1,25 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import people from './people-test.json';
 
 export default function App() {
-  fetch('http://api.joshuaproject.com/v1/people_groups/daily_unreached.json?api_key=b07deb2be7d9')
-  .then((res) => res.json())
-  .then((json) => {
-      // this.setState({
-      //     people: json,
-      //     DataisLoaded: true
-      // });
-      const str = JSON.stringify(json);
-      console.log(json);
-      // const str = JSON.stringify(this.people);
-  })
+  const [peopleGroup, setPeopleGroup] = useState([]);
+
+  if (!peopleGroup){
+
+    fetch('http://api.joshuaproject.net/v1/people_groups/daily_unreached.json?api_key=b07deb2be7d9')
+    .then((res) => res.json())
+    .then((json) => {
+        setPeopleGroup(json);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  console.log(peopleGroup[0].PeopNameInCountry);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>BePrayerful</Text>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text>{str}</Text>
-      {/* <Text>{this.json}</Text> */}
+      <Text>{this.peopleGroup[0].PeopNameInCountry}</Text>
+      <Text></Text>
       <StatusBar style="auto" />
     </View>
   );
