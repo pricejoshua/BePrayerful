@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "399035803420",
+    "project_id": "beprayerful-dce82",
+    "storage_bucket": "beprayerful-dce82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399035803420:android:17700f1bea1c9f9eabbcd9",
+        "android_client_info": {
+          "package_name": "com.beprayerful"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399035803420-gtn29bsal22td5gr6m682d3nqvegjnv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFbf3rJG1F691GxbIGO03UlVistpNmGmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399035803420-gtn29bsal22td5gr6m682d3nqvegjnv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

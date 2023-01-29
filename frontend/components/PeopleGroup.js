@@ -26,7 +26,6 @@ export default function PeopleGroup() {
             setPeopleGroupName(peopleGroup[0]['PeopNameInCountry']);
             setPeopleGroupSummary(peopleGroup[0]['ProfileText'][0]['Summary']);
             setPeopleGroupCountry(peopleGroup[0]['Ctry']);
-            
         }
     }, [peopleGroup]);
 
@@ -34,7 +33,7 @@ export default function PeopleGroup() {
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Today's People Group</Text>
-            <Text>The {peopleGroupName} in {peopleGroupCountry}</Text>
+            <Text style={styles.subheader}>The {peopleGroupName} in {peopleGroupCountry}</Text>
             <Text>{peopleGroupSummary}</Text>
         </View>
     );
@@ -54,5 +53,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: 50
+    },
+    subheader : {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 20
     }
 });
