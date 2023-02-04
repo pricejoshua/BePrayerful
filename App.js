@@ -3,14 +3,21 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PeopleGroup from './components/PeopleGroup';
 import auth from '@react-native-firebase/auth';
+import messaging from '@react-native-firebase/messaging';
 
 export default function App() {
 
   // from https://rnfirebase.io/auth/usage
+  // from https://blog.logrocket.com/react-native-push-notifications-firebase-cloud-messaging/
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
+
+  const subscribe = messaging().onMessage(async remoteMessage => {
+    console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+  });
 
   // Handle user state changes
   function onAuthStateChanged(user) {
