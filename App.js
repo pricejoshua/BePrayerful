@@ -1,9 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import PeopleGroup from './components/PeopleGroup';
 import auth from '@react-native-firebase/auth';
 import messaging from '@react-native-firebase/messaging';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './components/LoginScreen';
+import RegisterScreen from './components/RegisterScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
 
@@ -15,7 +21,10 @@ export default function App() {
   const [user, setUser] = useState();
 
   const subscribe = messaging().onMessage(async remoteMessage => {
-    console.log('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage)); 
+  });
+
+  messaging().setBackgroundMessageHandler(async remoteMessage => {
     Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
   });
 
@@ -32,11 +41,16 @@ export default function App() {
 
   if (initializing) return null;
 
+
+
   if (!user) {
     return (
-      <View>
-        <Text>Login</Text>
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 
