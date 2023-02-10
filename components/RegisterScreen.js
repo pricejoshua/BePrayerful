@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ImageBackground, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 const __doCreateUser = async (email, password) => {
     try {
@@ -18,7 +18,7 @@ const RegisterScreen = ({navigation, route}) => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
 
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState(false);
     const [message, setMessage] = useState('');
 
     const onChangeHandler = () => {
@@ -27,15 +27,10 @@ const RegisterScreen = ({navigation, route}) => {
 
     const onSubmitHandler = () => {
         __doCreateUser(email, password);
-        navigation.navigate('ContentList');
     };
 
-    const getMessage = () => {
-        const status = isError ? `Error: ` : `Success: `;
-        return status + message;
-    }
-
     return (
+        <ImageBackground source={require('../assets/images/gradient.jpg')} style={styles.image}>
             <View style={styles.card}>
                 <Text style={styles.heading}>Signup</Text>
                 <View style={styles.form}>
@@ -43,7 +38,7 @@ const RegisterScreen = ({navigation, route}) => {
                         <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={setEmail}></TextInput>
                         <TextInput style={styles.input} placeholder="Name" onChangeText={setName}></TextInput>
                         <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={setPassword}></TextInput>
-                        <Text style={[styles.message, {color: isError ? 'red' : 'green'}]}>{message ? getMessage() : null}</Text>
+                        {error && <Text style={[styles.message, {color: error ? 'red' : 'green'}]}>{error}</Text>}
                         <TouchableOpacity style={styles.button} onPress={onSubmitHandler}>
                             <Text style={styles.buttonText}>Done</Text>
                         </TouchableOpacity>
@@ -53,6 +48,7 @@ const RegisterScreen = ({navigation, route}) => {
                     </View>    
                 </View>
             </View>
+        </ImageBackground>
     );
 };
 

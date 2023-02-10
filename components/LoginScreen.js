@@ -50,7 +50,6 @@ const LoginScreen = ({navigation, route}) => {
     }
 
     const onSubmitHandler = () => {
-        navigation.navigate('ContentList');
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             var user = userCredential.user;
@@ -63,23 +62,24 @@ const LoginScreen = ({navigation, route}) => {
     }
 
     return (
-        <View style={styles.card}>
-            <Text style={styles.heading}>Login</Text>
-            <View style={styles.form}>
-                <View style={styles.inputs}>
-                    <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={setEmail}></TextInput>
-                    <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={setPassword}></TextInput>
-                    <Text style={[styles.message, {color: isError ? 'red' : 'green'}]}>{message ? getMessage() : null}</Text>
-                    {/* <TouchableOpacity style={styles.button} onPress={onSubmitHandler}> */}
-                    <TouchableOpacity style={styles.button} onPress={onSubmitHandler}>
-                        <Text style={styles.buttonText}>Done</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonAlt} onPress={onChangeHandler}>
-                        <Text style={styles.buttonAltText}>Register</Text>
-                    </TouchableOpacity>
-                </View>    
+        <ImageBackground source={require('../assets/images/gradient.jpg')} style={styles.image}>
+            <View style={styles.card}>
+                <Text style={styles.heading}>Login</Text>
+                <View style={styles.form}>
+                    <View style={styles.inputs}>
+                        <TextInput style={styles.input} placeholder="Email" autoCapitalize="none" onChangeText={setEmail}></TextInput>
+                        <TextInput secureTextEntry={true} style={styles.input} placeholder="Password" onChangeText={setPassword}></TextInput>
+                        <Text style={[styles.message, {color: isError ? 'red' : 'green'}]}>{message ? getMessage() : null}</Text>
+                        <TouchableOpacity style={styles.button} onPress={onSubmitHandler}>
+                            <Text style={styles.buttonText}>Done</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonAlt} onPress={onChangeHandler}>
+                            <Text style={styles.buttonAltText}>Register</Text>
+                        </TouchableOpacity>
+                    </View>    
+                </View>
             </View>
-        </View>
+        </ImageBackground>
     );
 };
 
