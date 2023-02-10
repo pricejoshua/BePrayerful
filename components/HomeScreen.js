@@ -1,12 +1,16 @@
 import PeopleGroup from "./PeopleGroup";
 import { Text, StyleSheet, View, Button } from "react-native";
 import auth from '@react-native-firebase/auth';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+// import styles from "../styles";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>BePrayerful</Text>
             <PeopleGroup />
+            <Button title="Users" onPress={() => navigation.navigate('Users')} />
             <Button title="Sign Out" onPress={() => auth().signOut()} />
         </View>
     );

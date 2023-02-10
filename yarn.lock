@@ -1818,6 +1818,11 @@
     "@expo/config-plugins" "^5.0.4"
     plist "^3.0.5"
 
+"@react-native-firebase/database@^17.1.0":
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-17.1.0.tgz#133651e17c4140c7354dce109b32682febf39f0f"
+  integrity sha512-eiMX+IWFs/pT14mnGOCp1AFSqCcyghboNsli/Z+JXayx5IfiLCcB9yI6y2v5dvwGMtKLUIVfei78h2o8fitoUA==
+
 "@react-native-firebase/messaging@^17.0.0":
   version "17.0.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-17.0.0.tgz#77eb772b2550bf15107883b553f4a5e2138e8c3b"
