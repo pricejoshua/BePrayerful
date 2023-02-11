@@ -1,12 +1,21 @@
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database';
 import React, { useState } from 'react';
 import { ImageBackground, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
-const __doCreateUser = async (email, password) => {
+const __doCreateUser = async (email, name, password) => {
     try {
         const { user } = await auth().createUserWithEmailAndPassword(email, password);
+        const update = {
+            displayName: name,
+        };
+        await auth().currentUser.updateProfile(update);
         console.log(user);
+        database().ref('/users/' + user.uid).set({
+            name: name,
+            email: email,
+        });
     } catch (e) {
         console.log(e);
     }
@@ -26,7 +35,7 @@ const RegisterScreen = ({navigation, route}) => {
     };
 
     const onSubmitHandler = () => {
-        __doCreateUser(email, password);
+        __doCreateUser(email, name, password);
     };
 
     return (
