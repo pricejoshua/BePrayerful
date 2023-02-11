@@ -1,5 +1,5 @@
-import PeopleGroup from "./PeopleGroup";
-import { Text, StyleSheet, View, Button } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
+import Button from "../components/AButton";
 import auth from '@react-native-firebase/auth';
 
 export default function UsersScreen({ navigation }) {
@@ -11,3 +11,20 @@ export default function UsersScreen({ navigation }) {
         </View>
     );
 }
+
+export const styles = StyleSheet.create({
+    container: {
+        flex: 3,
+        flexDirection: 'column',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        paddingTop: 60,
+        paddingBottom: 60,
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    }
+  });

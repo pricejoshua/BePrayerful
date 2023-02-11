@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 
 export default function Button(props) {
-  const { onPress, title = 'Save' } = props;
+  const { title, onPress } = props;
   return (
     <Pressable style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: 32,
+    marginVertical: 10,
     borderRadius: 4,
     elevation: 3,
     backgroundColor: 'black',

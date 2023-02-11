@@ -6,10 +6,10 @@ import auth from '@react-native-firebase/auth';
 import messaging from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './components/LoginScreen';
-import RegisterScreen from './components/RegisterScreen';
-import HomeScreen from './components/HomeScreen';
-import UsersScreen from './components/UsersScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import HomeScreen from './screens/HomeScreen';
+import UsersScreen from './screens/UsersScreen';
 
 
 const Stack = createStackNavigator();
@@ -50,7 +50,11 @@ export default function App() {
       //   <HomeScreen />
       // </View>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+        >
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         </Stack.Navigator>
@@ -60,7 +64,11 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+      >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Users" component={UsersScreen} />
       </Stack.Navigator>
