@@ -10,6 +10,7 @@ export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>BePrayerful</Text>
+            <Button style={styles.button} title="Profile" onPress={() => navigation.navigate('Profile')} />
             <PeopleGroup />
             <Button title="Users" onPress={() => navigation.navigate('Users')} />
             <Button title="Sign Out" onPress={() => auth().signOut()} />
