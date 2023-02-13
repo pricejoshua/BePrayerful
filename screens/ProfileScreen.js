@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import Button from '../components/AButton';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
+import storage from '@react-native-firebase/storage';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function ProfileScreen({ navigation }) {
@@ -41,6 +43,9 @@ export default function ProfileScreen({ navigation }) {
             allowsEditing: true,
             aspect: [1, 1],
             quality: 1,
+        }).then((result) => {
+            ref = storage().ref('profile-pictures/' + user.uid);
+            ref.putFile(result.assets[0].uri);
         });
 
         console.log(result);
@@ -72,8 +77,8 @@ export default function ProfileScreen({ navigation }) {
                 value={password}
             />
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Button title="Pick an image from camera roll" onPress={pickImage} />
-                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+                {image && <Image source={{ uri: image }} style={styles.image} />}
+                <Button title="Change Profile Picture" onPress={pickImage} />
             </View>
             <Button title="Update" onPress={update} />
             <Button title="Home" onPress={() => navigation.navigate('Home')} />
@@ -107,4 +112,11 @@ const styles = StyleSheet.create({
         elevation: 3,
         backgroundColor: 'black',
     },
+    image: {
+        borderRadius: 200,
+        width: 200,
+        height: 200,
+        borderWidth: 3,
+        borderColor: "black",
+    }
   });

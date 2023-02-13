@@ -1,19 +1,25 @@
 import PeopleGroup from "../components/PeopleGroup";
-import { Text, StyleSheet, View, Pressable } from "react-native";
+import { Text, StyleSheet, View, Pressable, Image } from "react-native";
 import auth from '@react-native-firebase/auth';
 import Button from "../components/AButton";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 // import styles from "../styles";
 
+const test_photo_url = "https://via.placeholder.com/150";
+
 export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>BePrayerful</Text>
-            <Button style={styles.button} title="Profile" onPress={() => navigation.navigate('Profile')} />
-            <PeopleGroup />
-            <Button title="Users" onPress={() => navigation.navigate('Users')} />
-            <Button title="Sign Out" onPress={() => auth().signOut()} />
+            <View style={styles.container}>
+                <Text style={styles.title}>BePrayerful</Text>
+                <PeopleGroup />
+                <Button title="Users" onPress={() => navigation.navigate('Users')} />
+                <Button title="Sign Out" onPress={() => auth().signOut()} />
+            </View>
+            <Pressable style={styles.profileImagePressable} onPress={() => navigation.navigate('Profile')}>
+                <Image style={styles.profileImage} source={{uri: test_photo_url}} />
+            </Pressable>
         </View>
     );
 }
@@ -24,9 +30,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'space-around',
-        paddingTop: 60,
-        paddingBottom: 60,
+        paddingTop: 40,
+        paddingBottom: 40,
     },
     title: {
       fontSize: 20,
@@ -41,5 +46,25 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         elevation: 3,
         backgroundColor: 'black',
+    },    
+    profileImagePressable: {
+        top: 5,
+        right: 5,
+        position: "absolute",
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        overflow: "hidden",
+        borderWidth: 3,
+        borderColor: "black",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
+    profileImage: {
+        top: 0,
+        right: 0,
+        width: 50,
+        height: 50,
+        overflow: "hidden",
+    }
   });
