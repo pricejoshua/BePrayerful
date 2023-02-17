@@ -15,8 +15,13 @@ export default function ProfileScreen({ navigation }) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [image, setImage] = useState(null);
 
     const user = auth().currentUser;
+
+    if (image == null && user.photoURL) {
+        setImage(user.photoURL);
+    }
 
     const update = () => {
         setLoading(true);
@@ -34,8 +39,6 @@ export default function ProfileScreen({ navigation }) {
         });
     }
 
-    const [image, setImage] = useState(null);
-
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -43,15 +46,22 @@ export default function ProfileScreen({ navigation }) {
             allowsEditing: true,
             aspect: [1, 1],
             quality: 1,
-        }).then((result) => {
-            ref = storage().ref('profile-pictures/' + user.uid);
-            ref.putFile(result.assets[0].uri);
         });
 
         console.log(result);
 
         if (!result.canceled) {
             setImage(result.assets[0].uri);
+            ref = storage().ref('profile-pictures/' + user.uid);
+            await ref.putFile(result.assets[0].uri);
+            // update the user's profile picture
+            user.updateProfile({
+                photoURL: await ref.getDownloadURL(),
+            }).then(() => {
+                console.log('Profile picture updated!');
+            }).catch((error) => {
+                console.log(error);
+            });
         }
     };
 

@@ -1,12 +1,14 @@
 import PeopleGroup from "../components/PeopleGroup";
 import { Text, StyleSheet, View, Pressable, Image } from "react-native";
 import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
 import Button from "../components/AButton";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 // import styles from "../styles";
 
 const test_photo_url = "https://via.placeholder.com/150";
+const photo_uri = auth().currentUser.photoURL;
 
 export default function HomeScreen({ navigation }) {
     return (
@@ -18,7 +20,7 @@ export default function HomeScreen({ navigation }) {
                 <Button title="Sign Out" onPress={() => auth().signOut()} />
             </View>
             <Pressable style={styles.profileImagePressable} onPress={() => navigation.navigate('Profile')}>
-                <Image style={styles.profileImage} source={{uri: test_photo_url}} />
+                <Image style={styles.profileImage} source={{uri: photo_uri }} />
             </Pressable>
         </View>
     );
