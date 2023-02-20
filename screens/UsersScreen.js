@@ -5,6 +5,7 @@ import database from '@react-native-firebase/database';
 import storage from '@react-native-firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { render } from "react-dom";
+import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 
 
 
@@ -43,22 +44,13 @@ export default function UsersScreen({ navigation }) {
 
                 const userDict = {};
 
-                
-
                 for (let key in userList) {
                     let user = userList[key];
                     user.uid = key;
-                    storage().ref('profile-pictures/' + auth().currentUser.uid).getDownloadURL().then((url) => {
-                        user.profile_pic = url;
-                    })
-                    // user.profile_pic = storage().ref('profile-pictures/' + user.uid).getDownloadURL();
                     users.push(user);
                     userDict[key] = user;
                 }
 
-
-
-                console.log("users" , users);
                 setUsers(users);
             });
     }
@@ -70,11 +62,14 @@ export default function UsersScreen({ navigation }) {
     }
 
     const Item = ({ name, email, profile_url }) => (
-        <View>
-            <Text>{name}</Text>
-            <Text>{email}</Text>
-            <Image source={{uri: profile_url}} style={{width: 50, height: 50}} />
-        </View>
+        // onPress={console.log(profile_url)}
+        <Pressable style={styles.userView} onPress={() => console.log("pressed", profile_url)}>
+            <Image style={styles.profileImage} source={{uri: profile_url}} />
+            <View style={styles.userText}>
+                <Text>{name}</Text>
+                <Text>{email}</Text>
+            </View>
+        </Pressable>
     );
 
 
@@ -112,5 +107,26 @@ export const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: 'bold',
       textAlign: 'center',
+    },
+    profileImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        overflow: "hidden",
+        borderWidth: 3,
+        borderColor: "black",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    userView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: 10,
+        backgroundColor: '#eee',
+        padding: 10,
+        borderRadius: 10,
+    },
+    userText: {
+        marginLeft: 10,
     }
   });

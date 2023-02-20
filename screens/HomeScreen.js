@@ -2,6 +2,7 @@ import PeopleGroup from "../components/PeopleGroup";
 import { Text, StyleSheet, View, Pressable, Image } from "react-native";
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
+import database from '@react-native-firebase/database';
 import Button from "../components/AButton";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -13,13 +14,17 @@ const test_photo_url = "https://via.placeholder.com/150";
 
 export default function HomeScreen({ navigation }) {
     const [photo_uri, setPhotoUri] = useState(test_photo_url);
-    if (auth().currentUser) {
-        storage().ref('profile-pictures/' + auth().currentUser.uid).getDownloadURL().then((url) => {
-            setPhotoUri(url);
-        }).catch((error) => {
+
+    // Set up the profile picture from the firebase database storage
+    
+    database().ref('users/' + auth().currentUser.uid).on('value', snapshot => {
+        let data = snapshot.val();
+        if (data.profile_pic) {
+            setPhotoUri(data.profile_pic);
+        } else {
             setPhotoUri(test_photo_url);
-        });
-    }
+        }
+    });
     return (
         <View style={styles.container}>
             <View style={styles.container}>
