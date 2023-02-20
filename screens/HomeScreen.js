@@ -5,10 +5,8 @@ import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import database from '@react-native-firebase/database';
 import Button from "../components/AButton";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { AntDesign } from "@expo/vector-icons";
 import { useState } from "react";
-// import styles from "../styles";
 
 const test_photo_url = "https://via.placeholder.com/150";
 
@@ -31,11 +29,13 @@ export default function HomeScreen({ navigation }) {
             <View style={styles.container}>
                 <Text style={styles.title}>BePrayerful</Text>
                 <PeopleGroup />
-                <Button title="Users" onPress={() => navigation.navigate('Users')} />
                 <Button title="Sign Out" onPress={() => auth().signOut()} />
             </View>
             <Pressable style={styles.profileImagePressable} onPress={() => navigation.navigate('Profile')}>
                 <FastImage style={styles.profileImage} source={{uri: photo_uri }} />
+            </Pressable>
+            <Pressable style={styles.addFriendButton} onPress={() => navigation.navigate('Users')}>
+                <AntDesign name="adduser" size={50} color="black" />
             </Pressable>
         </View>
     );
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         paddingBottom: 40,
     },
     title: {
-      fontSize: 20,
+      fontSize: 30,
       fontWeight: 'bold',
       textAlign: 'center',
     },
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
     },    
     profileImagePressable: {
-        top: 5,
+        top: 10,
         right: 5,
         position: "absolute",
         width: 50,
@@ -83,5 +83,12 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         overflow: "hidden",
-    }
+    },
+    addFriendButton: {
+        top: 10,
+        left: 5,
+        position: "absolute",
+        width: 50,
+        height: 50
+    },
   });

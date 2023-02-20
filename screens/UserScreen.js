@@ -5,7 +5,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 export default function UserScreen({ navigation, route }) {
-    console.log(route.params.user);
     const user = route.params.user;
     return (
         <View style={styles.container}>

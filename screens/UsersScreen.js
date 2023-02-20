@@ -7,6 +7,7 @@ import storage from '@react-native-firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { render } from "react-dom";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import { AntDesign } from "@expo/vector-icons";
 
 
 
@@ -46,6 +47,9 @@ export default function UsersScreen({ navigation }) {
                 const userDict = {};
 
                 for (let key in userList) {
+                    if (key == auth().currentUser.uid) {
+                        continue;
+                    }
                     let user = userList[key];
                     user.uid = key;
                     users.push(user);
@@ -75,6 +79,7 @@ export default function UsersScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <AntDesign style={styles.backButtonh} name="back" size={50} color="black" onPress={() => navigation.goBack()} />
             <Text style={styles.title}>Users</Text>
             {!loading ? (
                 <FlatList
@@ -128,5 +133,10 @@ export const styles = StyleSheet.create({
     },
     userText: {
         marginLeft: 10,
+    },
+    backButton: {
+        position: 'absolute',
+        top: 10,
+        left: 10,
     }
   });
