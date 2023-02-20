@@ -5,12 +5,21 @@ import storage from '@react-native-firebase/storage';
 import Button from "../components/AButton";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useState } from "react";
 // import styles from "../styles";
 
 const test_photo_url = "https://via.placeholder.com/150";
-const photo_uri = auth().currentUser.photoURL;
+
 
 export default function HomeScreen({ navigation }) {
+    const [photo_uri, setPhotoUri] = useState(test_photo_url);
+    if (auth().currentUser) {
+        storage().ref('profile-pictures/' + auth().currentUser.uid).getDownloadURL().then((url) => {
+            setPhotoUri(url);
+        }).catch((error) => {
+            setPhotoUri(test_photo_url);
+        });
+    }
     return (
         <View style={styles.container}>
             <View style={styles.container}>

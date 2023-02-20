@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 import { ImageBackground, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
-const __doCreateUser = async (email, username, name, password) => {
+const __doCreateUser = async (email, name, password) => {
     try {
+        console.log("email", email, "name", name, "password", password)
         const { user } = await auth().createUserWithEmailAndPassword(email, password);
         const update = {
             displayName: name,
@@ -16,9 +17,9 @@ const __doCreateUser = async (email, username, name, password) => {
         database().ref('/users/' + user.uid).set({
             name: name,
             email: email,
-            username: username,
         });
     } catch (e) {
+        setMessage(e.message);
         console.log(e);
     }
 };

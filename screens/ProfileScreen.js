@@ -42,7 +42,7 @@ export default function ProfileScreen({ navigation }) {
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [1, 1],
             quality: 1,
@@ -54,6 +54,13 @@ export default function ProfileScreen({ navigation }) {
             setImage(result.assets[0].uri);
             ref = storage().ref('profile-pictures/' + user.uid);
             await ref.putFile(result.assets[0].uri);
+            database().ref('users/' + user.uid).update({
+                profile_pic: await ref.getDownloadURL(),
+            }).then(() => {
+                console.log('Profile picture updated!');
+            }).catch((error) => {
+                console.log(error);
+            });
             // update the user's profile picture
             user.updateProfile({
                 photoURL: await ref.getDownloadURL(),

@@ -47,9 +47,6 @@ export default function App() {
 
   if (!user) {
     return (
-      // <View>
-      //   <HomeScreen />
-      // </View>
       <NavigationContainer>
         <Stack.Navigator
         screenOptions={{
