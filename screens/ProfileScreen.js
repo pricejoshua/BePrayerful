@@ -74,12 +74,14 @@ export default function ProfileScreen({ navigation }) {
                 onChangeText={name => setName(name)}
                 value={name}
             />
+            <Text>{user.name}</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Email"
                 onChangeText={email => setEmail(email)}
                 value={email}
             />
+            <Text>{user.email}</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Password"
