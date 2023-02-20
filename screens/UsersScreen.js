@@ -1,4 +1,5 @@
-import { Text, StyleSheet, View, FlatList, Image } from "react-native";
+import { Text, StyleSheet, View, FlatList } from "react-native";
+import FastImage from "react-native-fast-image";
 import Button from "../components/AButton";
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
@@ -64,7 +65,7 @@ export default function UsersScreen({ navigation }) {
     const Item = ({ name, email, profile_url }) => (
         // onPress={console.log(profile_url)}
         <Pressable style={styles.userView} onPress={() => console.log("pressed", profile_url)}>
-            <Image style={styles.profileImage} source={{uri: profile_url}} />
+            <FastImage style={styles.profileImage} source={{uri: profile_url}} />
             <View style={styles.userText}>
                 <Text>{name}</Text>
                 <Text>{email}</Text>

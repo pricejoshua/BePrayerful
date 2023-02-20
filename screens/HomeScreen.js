@@ -1,5 +1,6 @@
 import PeopleGroup from "../components/PeopleGroup";
-import { Text, StyleSheet, View, Pressable, Image } from "react-native";
+import { Text, StyleSheet, View, Pressable } from "react-native";
+import FastImage from "react-native-fast-image";
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import database from '@react-native-firebase/database';
@@ -34,7 +35,7 @@ export default function HomeScreen({ navigation }) {
                 <Button title="Sign Out" onPress={() => auth().signOut()} />
             </View>
             <Pressable style={styles.profileImagePressable} onPress={() => navigation.navigate('Profile')}>
-                <Image style={styles.profileImage} source={{uri: photo_uri }} />
+                <FastImage style={styles.profileImage} source={{uri: photo_uri }} />
             </Pressable>
         </View>
     );
