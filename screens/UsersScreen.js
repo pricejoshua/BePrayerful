@@ -58,17 +58,16 @@ export default function UsersScreen({ navigation }) {
 
     const renderItem = ({ item }) => {
         return (
-            <Item name={item.name} email={item.email} profile_url={item.profile_pic} />
+            <Item user={ item }/>
         );
     }
 
-    const Item = ({ name, email, profile_url }) => (
-        // onPress={console.log(profile_url)}
-        <Pressable style={styles.userView} onPress={() => console.log("pressed", profile_url)}>
-            <FastImage style={styles.profileImage} source={{uri: profile_url}} />
+    const Item = ({ user }) => (
+        <Pressable style={styles.userView} onPress={() => navigation.navigate('User', {user})}>
+            <FastImage style={styles.profileImage} source={{uri: user.profile_pic}} />
             <View style={styles.userText}>
-                <Text>{name}</Text>
-                <Text>{email}</Text>
+                <Text>{user.name}</Text>
+                <Text>{user.email}</Text>
             </View>
         </Pressable>
     );
